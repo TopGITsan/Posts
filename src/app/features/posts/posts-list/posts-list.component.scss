@@ -1,0 +1,20 @@
+.posts-container ul {
+  @apply grid list-none gap-3 p-0;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.posts-container ul li {
+  @apply border border-solid border-b-white p-3;
+}
+
+.post {
+  @apply flex flex-col p-3;
+}
+
+.post-title {
+  @apply pb-3 text-lg font-bold;
+}
+
+.post-description {
+  @apply text-sm;
+}
