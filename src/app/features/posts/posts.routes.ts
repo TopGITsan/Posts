@@ -22,6 +22,14 @@ export const postsRoutes: Routes = [
           ),
       },
 
+      {
+        path: ':Id',
+        loadComponent: () =>
+          import('./post-details/post-details.component').then(
+            m => m.PostDetailsComponent
+          ),
+      },
+
       { path: '', redirectTo: 'list', pathMatch: 'full' },
     ],
   },
