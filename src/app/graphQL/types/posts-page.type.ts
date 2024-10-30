@@ -20,7 +20,7 @@ interface PageMetadata {
   totalCount: number;
 }
 
-interface Post {
+export interface Post {
   id: string;
   title: string;
   body: string;
