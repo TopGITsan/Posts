@@ -5,7 +5,6 @@ import {
   catchError,
   EMPTY,
   exhaustMap,
-  filter,
   map,
   of,
   switchMap,
