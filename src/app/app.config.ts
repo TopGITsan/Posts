@@ -7,6 +7,7 @@ import {
 import { provideRouter } from '@angular/router';
 
 import { provideHttpClient } from '@angular/common/http';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { InMemoryCache } from '@apollo/client/core';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
@@ -15,10 +16,10 @@ import { HttpLink } from 'apollo-angular/http';
 import { environment } from '../environments/environment.development';
 import { routes } from './app.routes';
 import * as appReducers from './store/store.reducer';
-
 export const appConfig: ApplicationConfig = {
   providers: [
     provideExperimentalZonelessChangeDetection(),
+    provideAnimations(),
     provideRouter(routes),
     provideHttpClient(),
     provideApollo(() => {
