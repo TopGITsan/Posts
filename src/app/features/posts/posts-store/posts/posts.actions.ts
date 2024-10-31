@@ -21,3 +21,8 @@ export const UNSELECT_POST_ID = createAction(
   '[Posts] Unselect Post Id',
   props<{ postId: null }>()
 );
+
+export const SAVE_POST = createAction(
+  '[Posts] Save Post',
+  props<{ post: Post }>()
+);

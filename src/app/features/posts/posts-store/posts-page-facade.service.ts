@@ -5,6 +5,7 @@ import { Post } from '../../../graphQL/types/posts-page.type';
 import { PostsPageState } from './posts-page.state';
 import {
   LOAD_POSTS,
+  SAVE_POST,
   SELECT_POST_ID,
   UNSELECT_POST_ID,
 } from './posts/posts.actions';
@@ -45,5 +46,9 @@ export class PostsPageFacadeService {
 
   onUnselectPostId(postId: null): void {
     this.#postsPageStore.dispatch(UNSELECT_POST_ID({ postId }));
+  }
+
+  onSavePost(post: Post): void {
+    this.#postsPageStore.dispatch(SAVE_POST({ post }));
   }
 }
