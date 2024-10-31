@@ -1,9 +1,11 @@
 @let posts = posts$ | async;
+@let error = error$ | async;
+@let loading = loading$ | async;
 
-<!-- @if (error) {
-  <p>Error: {{ error }}</p>
-} -->
-@defer (when posts !== null) {
+<p>Error: {{ error ?? 'no error' }}</p>
+<p>Loading: {{ loading }}</p>
+
+@if (posts !== null) {
   <div class="posts-container">
     <ul>
       @for (post of posts; track $index) {
@@ -18,7 +20,7 @@
       }
     </ul>
   </div>
-} @placeholder {
+} @else {
   <div class="posts-container">
     <ul>
       @for (post of [1, 2, 3, 4, 5, 6]; track $index) {
