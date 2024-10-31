@@ -2,7 +2,7 @@
 @let error = error$ | async;
 @let loading = loading$ | async;
 
-<p>Error: {{ error ?? 'no error' }}</p>
+<p>Has Error: {{ error ?? 'no error' }}</p>
 
 @if (!loading) {
   <div class="posts-container">
