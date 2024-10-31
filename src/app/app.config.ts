@@ -12,8 +12,9 @@ import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideApollo } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
-import { routes } from './app.routes';
 import { environment } from '../environments/environment.development';
+import { routes } from './app.routes';
+import * as appReducers from './store/store.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,15 +30,13 @@ export const appConfig: ApplicationConfig = {
         cache: new InMemoryCache(),
       };
     }),
-    provideStore(
-      {},
-      {
-        runtimeChecks: {
-          strictStateImmutability: true,
-          strictActionImmutability: true,
-        },
-      }
-    ),
+    provideStore(appReducers.reducers, {
+      metaReducers: appReducers.metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+      },
+    }),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
   ],
 };
