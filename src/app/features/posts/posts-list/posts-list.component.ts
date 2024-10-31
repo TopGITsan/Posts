@@ -17,4 +17,12 @@ export class PostsListComponent {
   error$ = this.#postsPageFacade.getError();
 
   loading$ = this.#postsPageFacade.getLoading();
+
+  handleSelectPost(postId: string) {
+    if (!postId) {
+      return;
+    }
+
+    this.#postsPageFacade.onSelectPostId(postId);
+  }
 }

@@ -3,6 +3,8 @@ import {
   LOAD_POSTS,
   LOAD_POSTS_FAILURE,
   LOAD_POSTS_SUCCESS,
+  SELECT_POST_ID,
+  UNSELECT_POST_ID,
 } from './posts.actions';
 import { initialPostsState, PostsState } from './posts.state';
 
@@ -23,6 +25,10 @@ const createPostsReducer = createReducer(
     ...state,
     loading: false,
     error,
+  })),
+  on(SELECT_POST_ID, UNSELECT_POST_ID, (state, { postId }) => ({
+    ...state,
+    selectedPostId: postId,
   }))
 );
 

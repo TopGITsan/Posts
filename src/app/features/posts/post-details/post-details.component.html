@@ -1,1 +1,14 @@
-<p>post-details works!</p>
+@let post = post$ | async;
+@if (post) {
+  <div>
+    <h2>Post Details</h2>
+    <p><strong>Titolo:</strong> {{ post.title }}</p>
+    <p><strong>Description:</strong> {{ post.body }}</p>
+    <h3>User information</h3>
+    <p><strong>Name:</strong> {{ post.user.name }}</p>
+    <p><strong>Username:</strong> {{ post.user.username }}</p>
+    <p><strong>Email:</strong> {{ post.user.email }}</p>
+  </div>
+}
+<!-- <p><strong>JSON:</strong></p>
+<pre>{{ post | json }}</pre> -->

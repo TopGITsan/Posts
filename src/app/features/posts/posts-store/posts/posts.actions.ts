@@ -11,3 +11,13 @@ export const LOAD_POSTS_FAILURE = createAction(
   '[Posts] Load posts failure',
   props<{ error: string }>()
 );
+
+export const SELECT_POST_ID = createAction(
+  '[Posts] Selected Post Id',
+  props<{ postId: string }>()
+);
+
+export const UNSELECT_POST_ID = createAction(
+  '[Posts] Unselect Post Id',
+  props<{ postId: null }>()
+);

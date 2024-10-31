@@ -1,11 +1,21 @@
 import { inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, map, of } from 'rxjs';
+import {
+  catchError,
+  EMPTY,
+  exhaustMap,
+  filter,
+  map,
+  of,
+  switchMap,
+} from 'rxjs';
 import { PostsService } from '../../../../graphQL/services/posts.service';
 import {
   LOAD_POSTS,
   LOAD_POSTS_FAILURE,
   LOAD_POSTS_SUCCESS,
+  SELECT_POST_ID,
 } from './posts.actions';
 export const loadPosts = createEffect(
   (actions$ = inject(Actions), postsService = inject(PostsService)) => {
@@ -22,4 +32,19 @@ export const loadPosts = createEffect(
     );
   },
   { functional: true }
+);
+
+export const selectPostId = createEffect(
+  (actions$ = inject(Actions), router = inject(Router)) => {
+    return actions$.pipe(
+      ofType(SELECT_POST_ID),
+      switchMap(({ postId }) => {
+        if (!postId) {
+          return EMPTY;
+        }
+        return of(router.navigateByUrl(`/posts/${postId}`));
+      })
+    );
+  },
+  { functional: true, dispatch: false }
 );
