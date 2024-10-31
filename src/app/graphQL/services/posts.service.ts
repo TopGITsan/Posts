@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { ApolloQueryResult, OperationVariables } from '@apollo/client/core';
 import { Apollo } from 'apollo-angular';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { Post, PostsPage } from '../types/posts-page.type';
 import { GET_POSTS } from '../posts.operations';
 
@@ -22,10 +22,18 @@ export class PostsService {
             response: ApolloQueryResult<{
               posts: PostsPage;
             }>
-            // TODO : check for data
-          ) => response.data.posts.data
+          ) => {
+            if (response.errors) {
+              throw Error('Backend error');
+            }
+
+            if (!response.data?.posts?.data) {
+              return [];
+            }
+            return response.data.posts.data;
+          }
         ),
-        catchError(_ => of([]))
+        catchError(error => throwError(() => error))
       );
   }
 }

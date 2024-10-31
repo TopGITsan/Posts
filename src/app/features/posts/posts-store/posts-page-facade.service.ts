@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Post } from '../../../graphQL/types/posts-page.type';
 import { PostsPageState } from './posts-page.state';
+import { LOAD_POSTS } from './posts/posts.actions';
 import {
   errorSelector,
   loadingSelector,
@@ -28,5 +29,9 @@ export class PostsPageFacadeService {
 
   getSelectedPostId(): Observable<string | null> {
     return this.#postsPageStore.select(selectedPostIdSelector);
+  }
+
+  onLoadPosts(): void {
+    this.#postsPageStore.dispatch(LOAD_POSTS());
   }
 }

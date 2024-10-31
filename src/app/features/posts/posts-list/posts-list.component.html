@@ -3,12 +3,11 @@
 @let loading = loading$ | async;
 
 <p>Error: {{ error ?? 'no error' }}</p>
-<p>Loading: {{ loading }}</p>
 
-@if (posts !== null) {
+@if (!loading) {
   <div class="posts-container">
     <ul>
-      @for (post of posts; track $index) {
+      @for (post of posts; track post.id) {
         <li>
           <div class="post">
             <span class="post-title">{{ post.title }}</span>
@@ -28,7 +27,7 @@
           <div class="post">
             <span class="post-title">{{ '--------- ----------' }}</span>
             <span class="post-description">{{
-              '---------- ----- ----- ---- --------- --------- ------'
+              '---------- ----- ----- ---- --- Loading ------ --------- ------'
             }}</span>
           </div>
         </li>

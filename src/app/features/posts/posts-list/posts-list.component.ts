@@ -1,6 +1,5 @@
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { PostsService } from '../../../graphQL/services/posts.service';
 import { PostsPageFacadeService } from '../posts-store/posts-page-facade.service';
 
 @Component({
@@ -11,11 +10,9 @@ import { PostsPageFacadeService } from '../posts-store/posts-page-facade.service
   styleUrl: './posts-list.component.scss',
 })
 export class PostsListComponent {
-  private readonly postsService = inject(PostsService);
-
   #postsPageFacade = inject(PostsPageFacadeService);
 
-  posts$ = this.postsService.queryPosts();
+  posts$ = this.#postsPageFacade.getPosts();
 
   error$ = this.#postsPageFacade.getError();
 
