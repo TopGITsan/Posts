@@ -1,8 +1,9 @@
 import { AsyncPipe, JsonPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { PostsPageFacadeService } from '../posts-store/posts-page-facade.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-posts-list',
   standalone: true,
   imports: [AsyncPipe, JsonPipe],
