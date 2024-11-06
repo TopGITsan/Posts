@@ -45,6 +45,9 @@ export class CreatePostComponent {
 
   onSubmit() {
     console.log(this.postForm.value);
+    if (this.postForm.invalid) {
+      return;
+    }
 
     this.#postsPageFacade.onSavePost(this.postForm.value);
 
