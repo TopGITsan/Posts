@@ -4,36 +4,17 @@
 
 <p>Has Error: {{ error ?? 'no error' }}</p>
 
-@if (!loading) {
-  <div class="posts-container">
-    <ul>
-      @for (post of posts; track post.id) {
-        <li>
-          <div
-            class="post cursor-pointer"
-            (click)="handleSelectPost(post.id)">
-            <span class="post-title">{{ post.title }}</span>
-            <span class="post-description">{{ post.body }}</span>
-          </div>
-        </li>
-      } @empty {
-        <li>No posts</li>
+<div class="posts-container">
+  <ul>
+    @if (!loading) {
+      @for (post of posts; track trackPostFn) {
+        <app-post
+          [post]="post"
+          [loading]="loading"
+          (changeSelectPost)="handleSelectPost($event)" />
       }
-    </ul>
-  </div>
-} @else {
-  <div class="posts-container">
-    <ul>
-      @for (post of [1, 2, 3, 4, 5, 6]; track $index) {
-        <li>
-          <div class="post">
-            <span class="post-title">{{ '--------- --Loading-- ----' }}</span>
-            <span class="post-description">{{
-              '---------- ----- ----- ---- --- Loading ------ --------- ------'
-            }}</span>
-          </div>
-        </li>
-      }
-    </ul>
-  </div>
-}
+    } @else {
+      <app-post [loading]="loading" />
+    }
+  </ul>
+</div>
