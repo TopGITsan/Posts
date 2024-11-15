@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { ClickOutsideDirective } from '../../shared/directives/click-outside.directive';
 import { PasswordStrengthDirective } from '../../shared/directives/password-strength/password-strength.directive';
 
 interface RegisterForm {
@@ -17,9 +18,14 @@ interface RegisterForm {
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, PasswordStrengthDirective],
+  imports: [
+    ReactiveFormsModule,
+    PasswordStrengthDirective,
+    ClickOutsideDirective,
+  ],
   template: `
     <form
+      (appClickOutside)="onOutsideClick()"
       [formGroup]="registerForm"
       (ngSubmit)="onSubmit()"
       class="mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-md">
@@ -84,5 +90,9 @@ export class RegisterComponent {
 
   onSubmit() {
     console.log(this.registerForm.value);
+  }
+
+  onOutsideClick() {
+    console.log('>>>>>>>>>>>>>> clicked outside of the form');
   }
 }
