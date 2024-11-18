@@ -1,14 +1,15 @@
-import { AsyncPipe, JsonPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Post } from '../../../graphQL/types/posts-page.type';
+import { ScrollIntoViewDirective } from '../../../shared/directives/scroll-into-view.directive';
 import { PostComponent } from '../post/post.component';
 import { PostsPageFacadeService } from '../posts-store/posts-page-facade.service';
-import { Post } from '../../../graphQL/types/posts-page.type';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-posts-list',
   standalone: true,
-  imports: [AsyncPipe, PostComponent],
+  imports: [AsyncPipe, PostComponent, ScrollIntoViewDirective],
   templateUrl: './posts-list.component.html',
   styleUrl: './posts-list.component.scss',
 })
@@ -30,6 +31,12 @@ export class PostsListComponent {
   }
 
   trackPostFn(index: number, post: Post) {
-    return (post.id ?? (index + 98888888));
+    return post.id ?? index + 98888888;
+  }
+
+  onScrollIntoView() {
+    console.log(
+      '>>>>>>>>>>>>>>>>>> scroll into view last element, should load more elements'
+    );
   }
 }
