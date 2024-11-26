@@ -16,7 +16,7 @@ export class PortalService {
 
   getPortal(name: string) {
     return this.portalSubject.asObservable().pipe(
-      filter(portalRef => portalRef.name === name),
+      filter(portalRef => portalRef.name === name.toLowerCase()),
       map(portalRef => portalRef.portal)
     );
   }
