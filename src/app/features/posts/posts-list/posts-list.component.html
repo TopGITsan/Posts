@@ -5,6 +5,7 @@
 <p>Has Error: {{ error ?? 'no error' }}</p>
 
 <div class="posts-container">
+  <span *appPortal="'header'"> List </span>
   <ul>
     @if (!loading) {
       @for (post of posts; let last = $last; track post.id) {

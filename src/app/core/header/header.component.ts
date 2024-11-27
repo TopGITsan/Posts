@@ -5,6 +5,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
+import { PortalService } from '../../shared/services/portal.service';
+import { PortalModule } from '@angular/cdk/portal';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -16,6 +18,7 @@ import { RouterLink } from '@angular/router';
     MatButtonModule,
     MatIconModule,
     RouterLink,
+    PortalModule,
   ],
   template: `
     <mat-toolbar color="primary">
@@ -78,9 +81,11 @@ import { RouterLink } from '@angular/router';
         </svg>
         <span class="rounded-full bg-red-600 p-3 text-white">Zoneless</span>
         <h1>Hello, {{ title$ | async }}</h1>
+        <ng-template [cdkPortalOutlet]="portal$ | async"></ng-template>
         <button
           routerLink="/register"
-          mat-fab extended
+          mat-fab
+          extended
           aria-label="Example icon-button"
           class="flex w-32 items-center justify-around">
           <mat-icon>favorite</mat-icon>
@@ -102,5 +107,7 @@ import { RouterLink } from '@angular/router';
 })
 export class HeaderComponent {
   #storeFacade = inject(StoreFacadeService);
+  private readonly portalService = inject(PortalService);
   title$ = this.#storeFacade.getHeaderTitle();
+  portal$ = this.portalService.getPortal('header');
 }
