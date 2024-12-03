@@ -79,7 +79,9 @@ import { PortalModule } from '@angular/cdk/portal';
             </clipPath>
           </defs>
         </svg>
-        <span class="rounded-full bg-red-600 p-3 text-white">Zoneless</span>
+        <span class="rounded-full bg-red-600 p-2 text-xs text-white"
+          >Zoneless</span
+        >
         <h1>Hello, {{ title$ | async }}</h1>
         <ng-template [cdkPortalOutlet]="portal$ | async"></ng-template>
         <button
