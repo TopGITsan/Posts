@@ -17,11 +17,12 @@ import { PostsPageFacadeService } from '../posts-store/posts-page-facade.service
 export class PostsListComponent {
   #postsPageFacade = inject(PostsPageFacadeService);
 
-  posts$ = this.#postsPageFacade.getPosts();
+  readonly posts$ = this.#postsPageFacade.getPosts();
 
-  error$ = this.#postsPageFacade.getError();
+  readonly error$ = this.#postsPageFacade.getError();
 
-  loading$ = this.#postsPageFacade.getLoading();
+  readonly loading$ = this.#postsPageFacade.getLoading();
+  readonly header = 'List';
 
   handleSelectPost(postId: string) {
     if (!postId) {
