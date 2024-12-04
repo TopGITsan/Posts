@@ -6,7 +6,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { ClickOutsideDirective } from '../../shared/directives/click-outside.directive';
+import { HasPermissionDirective } from '../../shared/directives/has-permission.directive';
 import { PasswordStrengthDirective } from '../../shared/directives/password-strength/password-strength.directive';
 
 interface RegisterForm {
@@ -22,6 +24,8 @@ interface RegisterForm {
     ReactiveFormsModule,
     PasswordStrengthDirective,
     ClickOutsideDirective,
+    HasPermissionDirective,
+    RouterLink,
   ],
   template: `
     <form
@@ -71,12 +75,21 @@ interface RegisterForm {
       }
 
       <button
+        *appHasPermissionIf="'clown'; else hasPermissionElse"
         type="submit"
         [disabled]="registerForm.invalid"
         class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white focus:outline-none disabled:bg-gray-400 disabled:hover:bg-gray-400">
         Register
       </button>
     </form>
+    <ng-template #hasPermissionElse>
+      <button
+        routerLink="/"
+        type="button"
+        class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white focus:outline-none disabled:bg-gray-400 disabled:hover:bg-gray-400">
+        Go Home
+      </button>
+    </ng-template>
   `,
   styles: ``,
 })
