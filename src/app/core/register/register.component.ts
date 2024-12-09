@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
 import { ClickOutsideDirective } from '../../shared/directives/click-outside.directive';
 import { HasPermissionDirective } from '../../shared/directives/has-permission.directive';
 import { PasswordStrengthDirective } from '../../shared/directives/password-strength/password-strength.directive';
+import { FocusDirective } from '../../shared/directives/focus.directive';
 
 interface RegisterForm {
   username: FormControl<string>;
@@ -26,6 +27,7 @@ interface RegisterForm {
     ClickOutsideDirective,
     HasPermissionDirective,
     RouterLink,
+    FocusDirective,
   ],
   template: `
     <form
@@ -43,6 +45,7 @@ interface RegisterForm {
         <input
           type="text"
           id="username"
+          [appFocus]="true"
           formControlName="username"
           placeholder="Enter Username"
           class="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none" />
