@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { FocusDirective } from '../../../shared/directives/focus.directive';
 import { PostsPageFacadeService } from '../posts-store/posts-page-facade.service';
 
 interface PostForm {
@@ -24,7 +25,7 @@ interface PostForm {
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-create-post',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, FocusDirective],
   templateUrl: './create-post.component.html',
   styleUrl: './create-post.component.scss',
 })
