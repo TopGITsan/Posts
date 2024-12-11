@@ -4,6 +4,7 @@ export enum Permission {
   CREATE_POSTS = 'create-posts',
   POSTS_LIST = 'posts-list',
   REGISTER = 'register',
+  NO_PERMISSION = 'no-permission',
 }
 
 export type PermissionKey = keyof typeof Permission;
