@@ -6,15 +6,16 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { FocusDirective } from '../../../shared/directives/focus.directive';
+import { TestingDataAttributeDirective } from '../../../shared/directives/testing-data-attribute.directive';
 import {
   Permission,
   PermissionService,
   PermissionValue,
 } from '../../../shared/services/permission.service';
 import { PostsPageFacadeService } from '../posts-store/posts-page-facade.service';
-import { MatFormFieldModule } from '@angular/material/form-field';
 interface PostForm {
   title: FormControl<string>;
   body: FormControl<string>;
@@ -34,10 +35,11 @@ interface PostForm {
   selector: 'app-create-post',
   standalone: true,
   imports: [
-    ReactiveFormsModule,
     FocusDirective,
-    MatSelectModule,
     MatFormFieldModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    TestingDataAttributeDirective,
   ],
   templateUrl: './create-post.component.html',
   styleUrl: './create-post.component.scss',
