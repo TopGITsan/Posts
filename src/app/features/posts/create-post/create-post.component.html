@@ -14,8 +14,17 @@
       id="title"
       [appFocus]="true"
       formControlName="title"
+      #title="control"
       placeholder="Enter Post Title"
       class="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none" />
+    @if (
+      title.control?.invalid && (title.control?.dirty || title.control?.touched)
+    ) {
+      <span>Has Error: </span>
+      @if (title.control?.hasError('required')) {
+        <span>Is required</span>
+      }
+    }
   </div>
   <div>
     <label
@@ -26,8 +35,17 @@
     <textarea
       id="body"
       formControlName="body"
+      #body="control"
       placeholder="Enter Post Body"
       class="focus:shadow-outline h-32 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"></textarea>
+    @if (
+      body.control?.invalid && (body.control?.dirty || body.control?.touched)
+    ) {
+      <span>Has Error: </span>
+      @if (body.control?.hasError('required')) {
+        <span>Is required</span>
+      }
+    }
   </div>
    
 
@@ -42,9 +60,18 @@
       <input
         type="text"
         id="name"
+        #name="control"
         formControlName="name"
         placeholder="Enter User Name"
         class="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none" />
+      @if (
+        name.control?.invalid && (name.control?.dirty || name.control?.touched)
+      ) {
+        <span>Has Error: </span>
+        @if (name.control?.hasError('required')) {
+          <span>Is required</span>
+        }
+      }
     </div>
     <div class="mt-4">
       <label
@@ -56,8 +83,22 @@
         type="email"
         id="email"
         formControlName="email"
+        #email="control"
         placeholder="Enter User Email"
         class="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none" />
+
+      @if (
+        email.control?.invalid &&
+        (email.control?.dirty || email.control?.touched)
+      ) {
+        <span>Has Error: </span>
+        @if (email.control?.hasError('required')) {
+          <span> Is required </span>
+        }
+        @if (email.control?.hasError('email')) {
+          <span> Is not an email </span>
+        }
+      }
     </div>
 
     <div class="mt-4">
@@ -70,8 +111,18 @@
         type="username"
         id="username"
         formControlName="username"
+        #username="control"
         placeholder="Enter Username"
         class="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none" />
+      @if (
+        username.control?.invalid &&
+        (username.control?.dirty || username.control?.touched)
+      ) {
+        <span>Has Error: </span>
+        @if (username.control?.hasError('required')) {
+          <span>Is required</span>
+        }
+      }
     </div>
     <div class="mt-4">
       <label
@@ -80,11 +131,21 @@
         >User phone:</label
       >
       <input
-        type="phone"
+        type="tel"
         id="phone"
         formControlName="phone"
+        #phone="control"
         placeholder="Enter User Phone"
         class="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none" />
+      @if (
+        phone.control?.invalid &&
+        (phone.control?.dirty || phone.control?.touched)
+      ) {
+        <span>Has Error: </span>
+        @if (phone.control?.hasError('required')) {
+          <span>Is required</span>
+        }
+      }
     </div>
     <div class="mt-4">
       <label
@@ -93,11 +154,21 @@
         >User website:</label
       >
       <input
-        type="website"
+        type="url"
         id="website"
         formControlName="website"
+        #website="control"
         placeholder="Enter User Website"
         class="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none" />
+      @if (
+        website.control?.invalid &&
+        (website.control?.dirty || website.control?.touched)
+      ) {
+        <span>Has Error: </span>
+        @if (website.control?.hasError('required')) {
+          <span>Is required</span>
+        }
+      }
     </div>
 
     <mat-form-field class="my-4 w-full">
