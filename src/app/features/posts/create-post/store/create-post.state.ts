@@ -2,6 +2,10 @@ import {
   Permission,
   PermissionValue,
 } from '../../../../shared/services/permission.service';
+
+/**
+ * read more at https://dev.to/this-is-angular/why-and-how-to-manage-state-for-angular-reactive-forms-25fn
+ */
 export const createPostStateKey = 'createPost';
 
 export interface CreatePost {
