@@ -18,7 +18,7 @@ import {
     '(blur)': 'onBlur()',
   },
 })
-export class RxFormControlDirective implements OnInit {
+export class RxFormControlShowRedShadowDirective implements OnInit {
   private readonly injector = inject(Injector);
 
   control: FormControl | undefined;
@@ -29,7 +29,7 @@ export class RxFormControlDirective implements OnInit {
       self: true,
       optional: true,
     });
-    console.log('control ', ngControl?.name)
+    console.log('RxFormControlDirective control ', ngControl?.name)
     if (ngControl instanceof FormControlDirective) {
       this.control = ngControl.control;
     } else if (ngControl instanceof FormControlName) {

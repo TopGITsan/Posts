@@ -1,3 +1,4 @@
+import { AsyncPipe, NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   FormControl,
@@ -8,7 +9,10 @@ import {
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { tap, using } from 'rxjs';
 import { FocusDirective } from '../../../shared/directives/focus.directive';
+import { PatchFormGroupValuesDirective } from '../../../shared/directives/patch-formGroup-values.directive';
+import { RxFormControlShowRedShadowDirective } from '../../../shared/directives/rx-form-control.directive';
 import { TestingDataAttributeDirective } from '../../../shared/directives/testing-data-attribute.directive';
 import {
   Permission,
@@ -16,8 +20,6 @@ import {
   PermissionValue,
 } from '../../../shared/services/permission.service';
 import { PostsPageFacadeService } from '../posts-store/posts-page-facade.service';
-import { RxFormControlDirective } from '../../../shared/directives/rx-form-control.directive';
-import { NgClass } from '@angular/common';
 interface PostForm {
   title: FormControl<string>;
   body: FormControl<string>;
@@ -37,13 +39,14 @@ interface PostForm {
   selector: 'app-create-post',
   standalone: true,
   imports: [
+    AsyncPipe,
     FocusDirective,
     MatFormFieldModule,
     MatSelectModule,
+    PatchFormGroupValuesDirective,
     ReactiveFormsModule,
+    RxFormControlShowRedShadowDirective,
     TestingDataAttributeDirective,
-    RxFormControlDirective,
-    NgClass,
   ],
   templateUrl: './create-post.component.html',
   styleUrl: './create-post.component.scss',
@@ -52,9 +55,8 @@ export class CreatePostComponent {
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly postsPageFacade = inject(PostsPageFacadeService);
   private readonly permissionService = inject(PermissionService);
-
-  permissions = this.permissionService.getPermissions();
-  postForm: FormGroup = this.fb.group<PostForm>({
+  readonly permissions = this.permissionService.getPermissions();
+  readonly postForm: FormGroup = this.fb.group<PostForm>({
     title: this.fb.control('', [Validators.required]),
     body: this.fb.control('', [Validators.required]),
     user: this.fb.group({
@@ -71,9 +73,18 @@ export class CreatePostComponent {
       ]),
     }),
   });
-
+  formValues$ = using(
+    () =>
+      this.postForm.valueChanges
+        .pipe(
+          tap(values => {
+            this.postsPageFacade.onCreatePostValueChanges(values);
+          })
+        )
+        .subscribe(),
+    () => this.postsPageFacade.getCreatePostFormValue() // Wherever you put it in your state tree
+  );
   onSubmit() {
-    console.log(this.postForm.value);
     if (this.postForm.invalid) {
       return;
     }
