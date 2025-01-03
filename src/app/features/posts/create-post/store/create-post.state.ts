@@ -2,7 +2,7 @@ import {
   Permission,
   PermissionValue,
 } from '../../../../shared/services/permission.service';
-export const createPostsStateKey = 'createPost';
+export const createPostStateKey = 'createPost';
 
 export interface CreatePost {
   title: string;
